@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Complexity Analysis of Various Matrix Multiplication Algorithms by devina-ekawati</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Complexity Analysis of Various Matrix Multiplication Algorithms</h1>
+        <p class="header"></p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/devina-ekawati/multiplication-matrix-algorithm-article/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/devina-ekawati/multiplication-matrix-algorithm-article/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/devina-ekawati/multiplication-matrix-algorithm-article">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/devina-ekawati">devina-ekawati</a></p>
+
+
+      </header>
+      <section>
+        <p>Perkalian matriks merupakan hal yang sudah tidak asing didengar sejak SMA. Kita tentunya telah mengetahui bagaimana cara mengalikan dua matriks. Namun agar hasil perkalian terdefinisi, ada satu syarat yang harus dipenuhi, yaitu jumlah kolom pada matriks pertama sama dengan jumlah baris pada matriks kedua dan jumlah baris pada matriks pertama sama dengan jumlah kolom pada matriks kedua. Setelah syarat tersebut terpenuhi, barulah perkalian matriks dapat dilakukan. Mengalikan matriks mungkin merupakan hal yang tidak sulit untuk kita kerjakan. Namun hal yang menarik adalah bagaimana jika kita menginginkan komputer untuk mengerjakan perkalian matriks tersebut?</p>
+
+<p>Terdapat berbagai macam algoritma untuk menyelesaikan perkalian matriks. Setiap algoritma memiliki kompleksitas yang sama atau berbeda-beda. Untuk matriks dengan jumlah baris dan kolom yang kecil, kompleksitas yang dimiliki oleh algoritma tertentu mungkin tidak memberikan efek yang cukup besar. Namun jika matriks memiliki jumlah baris dan kolom yang besar, pemakaian algoritma yang memiliki kompleksitas yang besar akan memakan waktu yang lama untuk mengalikan matriks tersebut. Berikut akan dijelaskan beberapa algoritma untuk melakukan perkalian matriks dan kompleksitasnya.</p>
+
+<h1>
+<a id="algoritma-brute-force" class="anchor" href="#algoritma-brute-force" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algoritma Brute Force</h1>
+
+<p>Cara mengalikan matriks dengan algoritma <em>brute force</em> sama dengan cara yang biasa kita lakukan, yaitu dengan menghitung setiap elemen hasil perkalian satu per satu, dengan mengalikan dua vektor yang panjangnya n. Misalkan C = A x B dan elemen-elemen matriks dinyatakan sebagai c<sub>ij</sub>, a<sub>ij</sub>, dan b<sub>ij</sub>. Perkalian matriks A dan B dapat dilakukan dengan cara:</p>
+
+<p></p>
+
+<p align="center">
+  <img src="https://github.com/devina-ekawati/multiplication-matrix-algorithm-article/blob/master/img/image001.JPG?raw=true" alt="image001">
+</p>
+
+<p></p>
+
+<p align="center">
+  <img src="https://github.com/devina-ekawati/multiplication-matrix-algorithm-article/blob/master/img/image002.jpg?raw=true" alt="image002">
+</p>
+
+<p></p>
+
+<p align="center">
+  Sumber :
+</p>
+
+<p></p>
+
+<p align="center">
+  Munir, Rinaldi. 2009. ”Diktat Kuliah IF 2251 Strategi Algoritmik”. Bandung:Program Studi Teknik Informatika STEI ITB.
+</p>
+
+<p><i>Pseudocode</i>-nya adalah sebagai berikut.</p>
+
+<pre><code>for i=1 to n
+   for j=1 to n    
+     c[i][j]=0
+     for k=1 to n
+         c[i][j] = c[i][j]+a[i][k]*b[k][j]
+</code></pre>
+
+<p>Berdasarkan <i>pseudocode</i> di atas,
+jumlah operasi perkalian adalah n<sup>3</sup> dan jumlah operasi penjumlahan
+adalah n<sup>3</sup>, sehingga totalnya adalah 2n<sup>3</sup>. Oleh karena itu,
+kompleksitas perkalian matriks dengan algoritma <i>brute force</i> adalah O(n<sup>3</sup>).</p>
+
+<h1>
+<a id="algoritma-perkalian-matriks-paralel" class="anchor" href="#algoritma-perkalian-matriks-paralel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algoritma Perkalian Matriks Paralel</h1>
+
+<p>Algoritma ini merupakan algoritma <i>divide and conquer</i>. Misalkan C = A x B. Setelah itu, bagilah matriks A dan B menjadi 4 bagian. Untuk lebih jelasnya perhatikan gambar di bawah ini.</p>
+
+<p></p>
+
+<p align="center">
+  <img src="https://github.com/devina-ekawati/multiplication-matrix-algorithm-article/blob/master/img/image003.png?raw=true" alt="image003">
+</p>
+
+<p></p>
+
+<p align="center">
+  Sumber :
+</p>
+
+<p></p>
+
+<p align="center">
+  <a href="http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/">http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/</a>
+, diakses 23 Mei 2015 (dengan beberapa modifikasi)
+</p>
+
+<p>Elemen-elemen matriks C adalah sebagai berikut.</p>
+
+<p>I = ae + bg</p>
+
+<p>J = af + bh</p>
+
+<p>K = ce + dg</p>
+
+<p>L = cf + ch</p>
+
+<p>Kompleksitas dari algoritma ini adalah O(n<sup>3</sup>) dan tidak memberikan perbaikan kompleksitas dibandingkan dengan algoritma <i>brute force</i>.</p>
+
+<h1>
+<a id="algoritma-starssen" class="anchor" href="#algoritma-starssen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algoritma Starssen</h1>
+
+<p>Algoritma Strassen juga merupakan algoritma jenis <i>divide and conquer</i>, yaitu membagi persoalan menjadi bagian yang
+lebih kecil untuk diselesaikan. Algoritma ini ditemukan oleh Volker Starssen pada tahun 1969.</p>
+
+<p>Misalkan C = A x B. Sama dengan Algoritma perkalian matriks parallel, matriks A dan B dibagi menjadi 4 bagian. Untuk lebih jelasnya perhatikan gambar dibawah ini.</p>
+
+<p></p>
+
+<p align="center">
+  <img src="https://github.com/devina-ekawati/multiplication-matrix-algorithm-article/blob/master/img/image004.png?raw=true" alt="image004">
+</p>
+
+<p></p>
+
+<p align="center">
+  Sumber :
+</p>
+
+<p></p>
+
+<p align="center">
+  <a href="http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/">http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/</a>
+, diakses 23 Mei 2015
+</p>
+
+<p>Kemudian didefinisikan P1, P2, …, P7 sedemikian sehingga</p>
+
+<p>P1 = a(f - h)</p>
+
+<p>P2 = (a + b)h</p>
+
+<p>P3 = (c + d)e</p>
+
+<p>P4 = d(g – e)</p>
+
+<p>P5 = (a + d)(e + h)</p>
+
+<p>P6 = (b – d)(g + h)</p>
+
+<p>P7 = (a – c)(e + f)</p>
+
+<p>Setelah itu didefinisikan hasil dari perkalian matriks, yaitu</p>
+
+<p>I = P5 + P4 – P2 + P6</p>
+
+<p>J = P1 + P2</p>
+
+<p>K = P3 + P4</p>
+
+<p>L = P1 + P5 – P3 – P7</p>
+
+<p>Perkalian matriks dengan menggunakan algoritma Starssen memiliki kompleksitas yang lebih kecil, yaitu O(n<sup>log 7</sup>) atau O(n<sup>2.81</sup>). Meskipun memiliki perbedaan yang tidak terlalu besar dibandingkan dengan menggunakan algoritma brute force, untuk n yang sangat besar, tentunya algoritma Starssen jauh lebih cepat dibandingkan dengan algortima <i>brute force</i>.</p>
+
+<p></p>
+
+<p align="center">
+  <img src="https://github.com/devina-ekawati/multiplication-matrix-algorithm-article/blob/master/img/image005.jpg?raw=true" alt="image005">
+</p>
+
+<p></p>
+
+<p align="center">
+  Sumber :
+</p>
+
+<p></p>
+
+<p align="center">
+  <a href="http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/">http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/</a>
+, diakses 23 Mei 2015
+</p>
+
+<h1>
+<a id="algoritma-coppersmith-winograd" class="anchor" href="#algoritma-coppersmith-winograd" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algoritma Coppersmith-Winograd</h1>
+
+<p>Algoritma perkalian matriks ini merupakan algoritma tercepat sampai tahun 2010 dengan kompleksitas O(n<sup>2.375477</sup>). Algoritma ini merupakan perbaikan dari algoritma <i>brute force </i>dan algoritma Starssen. Namun algoritma ini sangat kompleks untuk diimplementasikan dan hanya menguntungkan untuk matriks yang ukurannya besar sehingga algoritma ini jarang digunakan.</p>
+
+<h1>
+<a id="algoritma-stothers" class="anchor" href="#algoritma-stothers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algoritma Stothers</h1>
+
+<p>Algoritma Stothers dikemukakan oleh Andrew Stothers pada tahun 2010. Algoritma ini merupakan perbaikan dari algoritma Coppersmith-Winogard dengan kompleksitas O(n<sup>2.374</sup>).</p>
+
+<h1>
+<a id="algoritma-williams" class="anchor" href="#algoritma-williams" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algoritma Williams</h1>
+
+<p>Algoritma ini memiliki kompleksitas O(n<sup>2.373</sup>). Algoritma ini juga masih jarang digunakan karena sangat kompleks untuk diimplementasikan.</p>
+
+<p><br>
+<br>
+Selain algoritma yang telah dibahas di atas, masih terdapat beberapa macam algoritma lain untuk melakukan perkalian matriks. Sampai saat ini, belum terdapat algoritma perkalian matriks yang kompleksitasnya lebih kecil daripada O(n<sup>2</sup>). Algoritma perkalian matriks tercepat sampai saat ini adalah simplifikasi dari algoritma Williams yang dikemukakan oleh Francois Le Gall pada tahun 2014 dengan kompleksitas O(n<sup>2.3728639</sup>). Untuk lebih memperjelas berbagai macam algoritma perkalian matriks beserta kompleksitasnya, dapat melihat gambar di bawah ini.</p>
+
+<p></p>
+
+<p align="center">
+  <img src="https://github.com/devina-ekawati/multiplication-matrix-algorithm-article/blob/master/img/image006.jpg?raw=true" alt="image006">
+</p>
+
+<p></p>
+
+<p align="center">
+  Sumber :
+</p>
+
+<p></p>
+
+<p align="center">
+  <a href="http://en.wikipedia.org/wiki/Matrix_multiplication#Algorithms_for_efficient_matrix_multiplication">http://en.wikipedia.org/wiki/Matrix_multiplication#Algorithms_for_efficient_matrix_multiplication</a>
+, diakses 23 Mei 2015
+</p>
+
+<h3>
+<a id="referensi" class="anchor" href="#referensi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Referensi</h3>
+
+<p>Munir, Rinaldi. 2009. ”Diktat Kuliah IF 2251 Strategi Algoritmik”. Bandung:Program Studi Teknik Informatika STEI ITB.</p>
+
+<p><a href="http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/">http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/</a>, diakses 23 Mei 2015</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Matrix_multiplication#Algorithms_for_efficient_matrix_multiplication">http://en.wikipedia.org/wiki/Matrix_multiplication#Algorithms_for_efficient_matrix_multiplication</a>, diakses 23 Mei 2015</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
