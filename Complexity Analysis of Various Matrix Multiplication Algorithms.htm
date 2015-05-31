@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Complexity Analysis of Various Matrix Multiplication Algorithm</title>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 12 (filtered)">
+<style>
+<!--
+
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+code
+	{font-family:"Courier New";}
+pre
+	{mso-style-link:"HTML Preformatted Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Courier New";}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+p.MsoNoSpacing, li.MsoNoSpacing, div.MsoNoSpacing
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";}
+span.HTMLPreformattedChar
+	{mso-style-name:"HTML Preformatted Char";
+	mso-style-link:"HTML Preformatted";
+	font-family:"Courier New";}
+p.References, li.References, div.References
+	{mso-style-name:References;
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-indent:0in;
+	text-autospace:ideograph-numeric;
+	font-size:8.0pt;
+	font-family:"Times New Roman","serif";}
+.MsoPapDefault
+	{margin-bottom:10.0pt;
+	line-height:115%;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class=WordSection1>
+
+<h1 class=MsoNormal align=center style='text-align:center'><b><span
+style='font-size:20.0pt;line-height:115%'>Complexity Analysis of Various Matrix
+Multiplication Algorithms</span></b></h1>
+
+<p class=MsoNormal>Perkalian matriks merupakan hal yang sudah tidak asing
+didengar sejak SMA. Kita tentunya telah mengetahui bagaimana cara mengalikan
+dua matriks. Namun agar hasil perkalian terdefinisi, ada satu syarat yang harus
+dipenuhi, yaitu jumlah kolom pada matriks pertama sama dengan jumlah baris pada
+matriks kedua dan jumlah baris pada matriks pertama sama dengan jumlah kolom
+pada matriks kedua. Setelah syarat tersebut terpenuhi, barulah dapat dilakukan
+perkalian matriks. Perkalian matriks tentulah merupakan hal yang tidak sulit
+untuk kita kerjakan. Namun hal yang menarik adalah bagaimana jika kita
+menginginkan komputer untuk mengerjakan perkalian matriks tersebut?</p>
+
+<p class=MsoNormal>Terdapat berbagai macam algoritma untuk menyelesaikan
+perkalian matriks. Setiap algoritma memiliki kompleksitas yang sama atau
+berbeda-beda. Untuk matriks dengan jumlah baris dan kolom yang kecil,
+kompleksitas yang dimiliki oleh algoritma tertentu mungkin tidak memberikan
+efek yang cukup besar. Namun jika matriks memiliki jumlah baris dan kolom yang
+besar, pemakaian algoritma yang memiliki kompleksitas yang besar akan memakan
+waktu yang lama untuk mengalikan matriks tersebut. Berikut akan dijelaskan beberapa
+algoritma untuk melakukan perkalian matriks dan kompleksitasnya.</p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Algoritma
+<i>Brute Force</i></p>
+
+<p class=MsoListParagraphCxSpMiddle>Cara mengalikan matriks dengan algoritma <i>brute
+force</i> sama dengan cara yang biasa kita lakukan, yaitu dengan menghitung
+setiap elemen hasil perkalian satu per satu, dengan mengalikan dua vektor yang
+panjangnya n. Misalkan C = A x B dan elemen-elemen matriks dinyatakan sebagai c<sub>ij</sub>,
+a<sub>ij</sub>, dan b<sub>ij</sub>. Maka perkalian matriks A dan B dapat
+dilakukan dengan cara :</p>
+
+<p class=MsoListParagraphCxSpLast align=center style='text-align:center'><span
+style='position:relative;top:14.0pt'><img width=259 height=45
+src="Complexity%20Analysis%20of%20Various%20Matrix%20Multiplication%20Algorithms_files/image001.jpg"></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><img width=314
+height=109 id="Picture 1"
+src="Complexity%20Analysis%20of%20Various%20Matrix%20Multiplication%20Algorithms_files/image002.jpg"></p>
+
+<p class=MsoNoSpacing align=center style='margin-left:.5in;text-align:center'>Sumber
+:</p>
+
+<p class=MsoNoSpacing align=center style='margin-left:.5in;text-align:center'>Munir, Rinaldi. 2009. ”Diktat Kuliah IF 2251 Strategi Algoritmik”. Bandung:Program Studi Teknik Informatika STEI ITB.</p>
+
+<p class=MsoNoSpacing align=center style='margin-left:.5in;text-align:center'>&nbsp;</p>
+
+<p class=MsoListParagraph><i>Pseudocode</i>-nya adalah sebagai berikut.</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>for i=1 to n</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>   for j=1 to n    </p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>     c[i][j]=0</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>     for k=1 to n</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>         c[i][j] =
+c[i][j]+a[i][k]*b[k][j]</p>
+
+<p class=MsoListParagraphCxSpFirst>&nbsp;</p>
+
+<p class=MsoListParagraphCxSpMiddle>Berdasarkan <i>pseudocode</i> di atas,
+jumlah operasi perkalian adalah n<sup>3</sup> dan jumlah operasi penjumlahan
+adalah n<sup>3</sup>, sehingga totalnya adalah 2n<sup>3</sup>. Oleh karena itu,
+kompleksitas perkalian matriks dengan algoritma <i>brute force</i> adalah O(n<sup>3</sup>).</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Algoritma
+Perkalian Matriks Paralel</p>
+
+<p class=MsoListParagraphCxSpMiddle>Algoritma ini merupakan algoritma <i>divide
+and conquer</i>. Misalkan C = A x B. Setelah itu, bagilah matriks A dan B
+menjadi 4 bagian. Untuk lebih jelasnya dapat melihat gambar di bawah ini.</p>
+
+<p class=MsoListParagraphCxSpLast align=center style='text-align:center'><img
+width=493 height=219
+src="Complexity%20Analysis%20of%20Various%20Matrix%20Multiplication%20Algorithms_files/image003.png"></p>
+
+<p class=MsoNoSpacing align=center style='margin-left:.5in;text-align:center'>Sumber
+:</p>
+
+<p class=MsoNoSpacing align=center style='margin-left:.5in;text-align:center'><a
+href="http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/">http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/</a>
+, diakses 23 Mei 2015 (dengan beberapa modifikasi)</p>
+
+<p class=MsoNoSpacing align=center style='margin-left:.5in;text-align:center'>&nbsp;</p>
+
+<p class=MsoListParagraphCxSpFirst>Elemen-elemen matriks C adalah sebagai
+berikut.</p>
+
+<p class=MsoListParagraphCxSpMiddle>I = ae + bg</p>
+
+<p class=MsoListParagraphCxSpMiddle>J = af + bh</p>
+
+<p class=MsoListParagraphCxSpMiddle>K = ce + dg </p>
+
+<p class=MsoListParagraphCxSpMiddle>L = cf + ch</p>
+
+<p class=MsoListParagraphCxSpMiddle>&nbsp;</p>
+
+<p class=MsoListParagraphCxSpMiddle>Kompleksitas dari algoritma ini adalah O(n<sup>3</sup>)
+dan tidak memberikan perbaikan kompleksitas dibandingkan dengan algoritma <i>brute
+force</i>.</p>
+
+<p class=MsoListParagraphCxSpMiddle>&nbsp;</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Algoritma
+Starssen</p>
+
+<p class=MsoListParagraphCxSpMiddle>Algoritma Strassen juga merupakan algoritma
+jenis <i>divide and conquer</i>, yaitu membagi persoalan menjadi bagian yang
+lebih kecil untuk diselesaikan. Algoritma ini ditemukan oleh Volker Starssen
+pada tahun 1969. </p>
+
+<p class=MsoListParagraphCxSpMiddle>Misalkan C = A x B. Sama dengan Algoritma
+perkalian matriks parallel, matriks A dan B dibagi menjadi 4 bagian. Untuk
+lebih jelasnya perhatikan gambar dibawah ini.</p>
+
+<p class=MsoListParagraphCxSpLast align=center style='text-align:center'><img
+border=0 width=493 height=219 id="Picture 3"
+src="Complexity%20Analysis%20of%20Various%20Matrix%20Multiplication%20Algorithms_files/image004.png"></p>
+
+<p class=MsoNoSpacing align=center style='margin-left:.5in;text-align:center'>Sumber
+:</p>
+
+<p class=MsoNoSpacing align=center style='margin-left:.5in;text-align:center'><a
+href="http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/">http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/</a>
+, diakses 23 Mei 2015 (dengan beberapa modifikasi)</p>
+
+<p class=MsoNoSpacing align=center style='margin-left:.5in;text-align:center'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-align:justify'>Kemudian
+didefinisikan P1, P2, …, P7 sedemikian sehingga</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>P1 = a(f - h)</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>P2 = (a + b)h</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>P3 = (c + d)e</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>P4 = d(g – e)</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>P5 = (a + d)(e + h)</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>P6 = (b – d)(g + h)</p>
+
+<p class=MsoNormal style='margin-left:.5in'>P7 = (a – c)(e + f)</p>
+
+<p class=MsoNormal style='margin-left:.5in'>Setelah itu didefinisikan hasil
+dari perkalian matriks, yaitu</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>I = P5 + P4 – P2 + P6</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>J = P1 + P2</p>
+
+<p class=MsoNoSpacing style='margin-left:.5in'>K = P3 + P4</p>
+
+<p class=MsoNormal style='margin-left:.5in'>L = P1 + P5 – P3 – P7</p>
+
+<p class=MsoNormal style='margin-left:.5in;text-align:justify'>Perkalian
+matriks dengan menggunakan algoritma Starssen memiliki kompleksitas yang lebih
+kecil, yaitu O(n<sup>log 7</sup>) atau O(n<sup>2.81</sup>). Meskipun memiliki
+perbedaan yang tidak terlalu besar dibandingkan dengan menggunakan algoritma
+brute force, untuk n yang sangat besar, tentunya algoritma Starssen jauh lebih
+cepat dibandingkan dengan algortima <i>brute force</i>.</p>
+
+<p class=MsoNormal align=center style='margin-left:.5in;text-align:center'><img
+border=0 width=366 height=226 id="Picture 4"
+src="Complexity%20Analysis%20of%20Various%20Matrix%20Multiplication%20Algorithms_files/image005.jpg"></p>
+
+<p class=MsoNormal align=center style='margin-left:.5in;text-align:center'>Sumber
+: <a
+href="http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/">http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/</a>
+, diakses 23 Mei 2015</p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Algoritma
+Coppersmith-Winograd</p>
+
+<p class=MsoListParagraphCxSpMiddle>Algoritma perkalian matriks ini merupakan
+algoritma tercepat sampai tahun 2010 dengan kompleksitas O(n<sup>2.375477</sup>).
+Algoritma ini merupakan perbaikan dari algoritma <i>brute force </i>dan
+algoritma Starssen. Namun algoritma ini sangat kompleks untuk diimplementasikan
+dan hanya menguntungkan untuk matriks yang ukurannya besar sehingga algoritma
+ini jarang digunakan.</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Algoritma
+Stothers</p>
+
+<p class=MsoListParagraphCxSpMiddle>Algoritma Stothers dikemukakan oleh Andrew
+Stothers pada tahun 2010. Algoritma ini merupakan perbaikan dari algoritma
+Coppersmith-Winogard dengan kompleksitas O(n<sup>2.374</sup>).</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Algoritma
+Williams</p>
+
+<p class=MsoListParagraphCxSpLast>Algoritma ini memiliki kompleksitas O(n<sup>2.373</sup>).
+Algoritma ini juga masih jarang digunakan karena sangat kompleks untuk
+diimplementasikan.</p>
+
+<p class=MsoNormal>Selain algoritma yang telah dibahas di atas, masih terdapat
+beberapa macam algoritma lain untuk melakukan perkalian matriks. Sampai saat
+ini, belum terdapat algoritma perkalian matriks yang kompleksitasnya lebih
+kecil daripada O(n<sup>2</sup>). Algoritma perkalian matriks tercepat sampai
+saat ini adalah simplifikasi dari algoritma Williams yang dikemukakan oleh
+Francois Le Gall pada tahun 2014 dengan kompleksitas O(n<sup>2.3728639</sup>).
+Untuk lebih memperjelas berbagai macam algoritma perkalian matriks beserta
+kompleksitasnya, dapat melihat gambar di bawah ini.</p>
+
+<p class=MsoNormal align=center style='text-align:center'><img border=0
+width=352 height=343 id="Picture 5"
+src="Complexity%20Analysis%20of%20Various%20Matrix%20Multiplication%20Algorithms_files/image006.jpg"></p>
+
+<p class=MsoNormal align=center style='text-align:center'>Sumber : <a
+href="http://en.wikipedia.org/wiki/Matrix_multiplication#Algorithms_for_efficient_matrix_multiplication">http://en.wikipedia.org/wiki/Matrix_multiplication#Algorithms_for_efficient_matrix_multiplication</a>
+, diakses 23 Mei 2015</p>
+
+<p class=MsoNormal>Referensi :</p>
+
+<p class=MsoNormal>Munir, Rinaldi. 2009. ”Diktat Kuliah IF 2251 Strategi
+Algoritmik”. Bandung:Program Studi Teknik Informatika STEI ITB.</p>
+
+<p class=MsoNormal><a
+href="http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/">http://www.stoimen.com/blog/2012/11/26/computer-algorithms-strassens-matrix-multiplication/</a>
+, diakses 23 Mei 2015</p>
+
+<p class=MsoNormal><a
+href="http://en.wikipedia.org/wiki/Matrix_multiplication#Algorithms_for_efficient_matrix_multiplication">http://en.wikipedia.org/wiki/Matrix_multiplication#Algorithms_for_efficient_matrix_multiplication</a>
+, diakses 23 Mei 2015</p>
+
+</div>
+
+</body>
+
+</html>
